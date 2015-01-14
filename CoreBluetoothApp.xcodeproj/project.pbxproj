@@ -18,6 +18,8 @@
 		1029E21F1A64F8DE00507C4D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1029E21E1A64F8DE00507C4D /* CoreBluetooth.framework */; };
 		10FBD5F01A65E95F00D25B4C /* DiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FBD5EE1A65E95F00D25B4C /* DiscoverController.m */; };
 		10FBD5F11A65E95F00D25B4C /* DiscoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10FBD5EF1A65E95F00D25B4C /* DiscoverController.xib */; };
+		9FBE250D1A670FC000E41BB3 /* PeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE250B1A670FC000E41BB3 /* PeripheralViewController.m */; };
+		9FBE250E1A670FC000E41BB3 /* PeripheralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBE250C1A670FC000E41BB3 /* PeripheralViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,9 @@
 		10FBD5ED1A65E95F00D25B4C /* DiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverController.h; sourceTree = "<group>"; };
 		10FBD5EE1A65E95F00D25B4C /* DiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverController.m; sourceTree = "<group>"; };
 		10FBD5EF1A65E95F00D25B4C /* DiscoverController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverController.xib; sourceTree = "<group>"; };
+		9FBE250A1A670FC000E41BB3 /* PeripheralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeripheralViewController.h; sourceTree = "<group>"; };
+		9FBE250B1A670FC000E41BB3 /* PeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeripheralViewController.m; sourceTree = "<group>"; };
+		9FBE250C1A670FC000E41BB3 /* PeripheralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeripheralViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +109,9 @@
 				10FBD5ED1A65E95F00D25B4C /* DiscoverController.h */,
 				10FBD5EE1A65E95F00D25B4C /* DiscoverController.m */,
 				10FBD5EF1A65E95F00D25B4C /* DiscoverController.xib */,
+				9FBE250A1A670FC000E41BB3 /* PeripheralViewController.h */,
+				9FBE250B1A670FC000E41BB3 /* PeripheralViewController.m */,
+				9FBE250C1A670FC000E41BB3 /* PeripheralViewController.xib */,
 			);
 			path = CoreBluetoothApp;
 			sourceTree = "<group>";
@@ -184,6 +192,11 @@
 					1029E1F11A64F87000507C4D = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = RKT3M67D52;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					1029E20D1A64F87000507C4D = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -219,6 +232,7 @@
 				1029E2091A64F87000507C4D /* LaunchScreen.xib in Resources */,
 				10FBD5F11A65E95F00D25B4C /* DiscoverController.xib in Resources */,
 				1029E2061A64F87000507C4D /* Images.xcassets in Resources */,
+				9FBE250E1A670FC000E41BB3 /* PeripheralViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +252,7 @@
 			files = (
 				1029E1FB1A64F87000507C4D /* AppDelegate.m in Sources */,
 				1029E1F81A64F87000507C4D /* main.m in Sources */,
+				9FBE250D1A670FC000E41BB3 /* PeripheralViewController.m in Sources */,
 				1029E2011A64F87000507C4D /* ViewController.m in Sources */,
 				10FBD5F01A65E95F00D25B4C /* DiscoverController.m in Sources */,
 				1029E1FE1A64F87000507C4D /* CoreBluetoothApp.xcdatamodeld in Sources */,
@@ -364,9 +379,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CoreBluetoothApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -375,9 +393,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CoreBluetoothApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

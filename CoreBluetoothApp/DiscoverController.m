@@ -7,8 +7,9 @@
 //
 
 #import "DiscoverController.h"
-
 @interface DiscoverController ()
+@property (strong, atomic) NSMutableArray* peripherals;
+@property (weak, nonatomic) IBOutlet UITableView *peripheralTable;
 
 @end
 
@@ -16,12 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _peripherals = [NSMutableArray array];
     if (!_myCentralManager){
         _myCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
     }
-    
-    [_myCentralManager scanForPeripheralsWithServices:nil options:nil];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,8 +32,10 @@
     //Required method implementation if using the CBCentralManagerDelegate Protocol
     
     //Bluetooth LE needs to be powered on and available for use
-    if (central.state  == CBCentralManagerStatePoweredOff){
+    if (central.state  == CBCentralManagerStatePoweredOn){
         NSLog(@"Success: Bluetooth LE is on and available for use.");
+        [_myCentralManager scanForPeripheralsWithServices:nil options:nil];
+        NSLog(@"Scanning has started");
     }
     
     if (central.state < CBCentralManagerStatePoweredOn){
@@ -51,11 +52,68 @@
 
                   RSSI:(NSNumber *)RSSI {
     
+    NSData *manufacturerField = [advertisementData valueForKey:@"kCBAdvDataManufacturerData"];
+    NSString *manufacturerFieldString =  [[NSString alloc] initWithData:manufacturerField encoding:NSUTF8StringEncoding];
+    NSInteger manufacturerValue = [manufacturerFieldString integerValue];
     
+    if(RSSI.integerValue>-80 && manufacturerField != nil){
+        [_peripherals addObject:peripheral];
+        NSLog(@"Discovered new peripheral called: %@ with RSSI: %ld", peripheral.name, (long)RSSI.integerValue);
+        [_peripheralTable reloadData];
+    }
+}
+
+- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
     
-    NSLog(@"Discovered %@", peripheral.name);
+    NSLog(@"Device failed to connect to peripheral: %@", error);
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return 1;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    return [_peripherals count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"PeripheralCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    if([[_peripherals objectAtIndex:indexPath.row] name] == nil){
+        cell.textLabel.text = @"Unnamed Peripheral Device";
+    }
+    else{
+        cell.textLabel.text = [[_peripherals objectAtIndex:indexPath.row] name];
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [_myCentralManager connectPeripheral:[_peripherals objectAtIndex:indexPath.row] options:nil];
+}
+
+- (void)centralManager:(CBCentralManager *)central
+  didConnectPeripheral:(CBPeripheral *)peripheral {
+    NSLog(@"Connection to peripheral was successful!");
+    
+    [_myCentralManager stopScan];
+    NSLog(@"Scan stopped");
+    
+    [peripheral setDelegate:self];
     
 }
+
 /*
 #pragma mark - Navigation
 

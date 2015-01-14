@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface DiscoverController : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface DiscoverController : UITableViewController <CBCentralManagerDelegate, CBPeripheralDelegate>
 
 @property (nonatomic, strong) CBCentralManager* myCentralManager;
 @property (nonatomic, strong) CBPeripheral* myRemotePeripheral;
