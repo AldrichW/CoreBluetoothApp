@@ -48,6 +48,9 @@
     }
     else if(peripheral.state == CBPeripheralManagerStatePoweredOff){
         NSLog(@"Error: BLE is currently powered off");
+        UIAlertView *bluetoothOffAlert = [[UIAlertView alloc] initWithTitle:@"Bluetooth Disabled" message:@"Bluetooth must be on to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [bluetoothOffAlert show];
     }
     
 }

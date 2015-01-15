@@ -53,10 +53,9 @@
                   RSSI:(NSNumber *)RSSI {
     
     NSData *manufacturerField = [advertisementData valueForKey:@"kCBAdvDataManufacturerData"];
-    NSString *manufacturerFieldString =  [[NSString alloc] initWithData:manufacturerField encoding:NSUTF8StringEncoding];
-    NSInteger manufacturerValue = [manufacturerFieldString integerValue];
+    NSString *manufacturerFieldString =  [[NSString alloc] initWithData:manufacturerField encoding:NSUnicodeStringEncoding];
     
-    if(RSSI.integerValue>-80 && manufacturerField != nil){
+    if(RSSI.integerValue>-80 && manufacturerFieldString != nil){
         [_peripherals addObject:peripheral];
         NSLog(@"Discovered new peripheral called: %@ with RSSI: %ld", peripheral.name, (long)RSSI.integerValue);
         [_peripheralTable reloadData];

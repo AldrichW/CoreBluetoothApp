@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-@interface PeripheralViewController : UIViewController <CBPeripheralManagerDelegate>
+@interface PeripheralViewController : UIViewController <CBPeripheralManagerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) CBPeripheralManager* myPeripheralManager;
 @property (nonatomic, strong) CBMutableCharacteristic* transferCharacteristic;
