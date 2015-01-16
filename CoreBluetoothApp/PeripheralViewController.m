@@ -10,6 +10,7 @@
 
 @interface PeripheralViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *manufacturerDataValue;
+@property (weak, nonatomic) IBOutlet UILabel *bluetoothStatusText;
 
 @end
 
@@ -43,12 +44,18 @@
 -(void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral{
     
     if(peripheral.state == CBPeripheralManagerStatePoweredOn){
-        NSLog(@"Success: BLE is enabled and available to use");
+        NSLog(@"Success: Peripheral BLE is enabled and available to use");
+        [_bluetoothStatusText setText:@"Active"];
+        [_bluetoothStatusText setTextColor:[UIColor greenColor]];
+        
         [_myPeripheralManager startAdvertising:_advertisementData];
     }
     else if(peripheral.state == CBPeripheralManagerStatePoweredOff){
-        NSLog(@"Error: BLE is currently powered off");
-        UIAlertView *bluetoothOffAlert = [[UIAlertView alloc] initWithTitle:@"Bluetooth Disabled" message:@"Bluetooth must be on to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        NSLog(@"Error: Peripheral BLE is currently powered off");
+        UIAlertView *bluetoothOffAlert = [[UIAlertView alloc] initWithTitle:@"Bluetooth was Disabled" message:@"Bluetooth must be on to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [_bluetoothStatusText setText:@"InActive"];
+        [_bluetoothStatusText setTextColor:[UIColor redColor]];
         
         [bluetoothOffAlert show];
     }

@@ -7,9 +7,12 @@
 //
 
 #import "DiscoverController.h"
+#import "PeripheralManagementViewController.h"
+
 @interface DiscoverController ()
 @property (strong, atomic) NSMutableArray* peripherals;
 @property (weak, nonatomic) IBOutlet UITableView *peripheralTable;
+@property (nonatomic) BOOL connected;
 
 @end
 
@@ -21,6 +24,7 @@
     if (!_myCentralManager){
         _myCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
     }
+    _connected = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,14 +37,17 @@
     
     //Bluetooth LE needs to be powered on and available for use
     if (central.state  == CBCentralManagerStatePoweredOn){
-        NSLog(@"Success: Bluetooth LE is on and available for use.");
+        NSLog(@"Success: Central Bluetooth LE is on and available for use.");
         [_myCentralManager scanForPeripheralsWithServices:nil options:nil];
         NSLog(@"Scanning has started");
     }
     
-    if (central.state < CBCentralManagerStatePoweredOn){
+    if (central.state == CBCentralManagerStatePoweredOff){
         //If less than this constant, all CB scanning has stopped and disconnected
-        NSLog(@"Error: Bluetooth LE is unavailable.");
+        NSLog(@"Error: Central BLE is currently powered off");
+        UIAlertView *bluetoothOffAlert = [[UIAlertView alloc] initWithTitle:@"Bluetooth was Disabled" message:@"Bluetooth must be on to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [bluetoothOffAlert show];
     }
 }
 
@@ -55,7 +62,7 @@
     NSData *manufacturerField = [advertisementData valueForKey:@"kCBAdvDataManufacturerData"];
     NSString *manufacturerFieldString =  [[NSString alloc] initWithData:manufacturerField encoding:NSUnicodeStringEncoding];
     
-    if(RSSI.integerValue>-80 && manufacturerFieldString != nil){
+    if(RSSI.integerValue>-50 && manufacturerFieldString != nil){
         [_peripherals addObject:peripheral];
         NSLog(@"Discovered new peripheral called: %@ with RSSI: %ld", peripheral.name, (long)RSSI.integerValue);
         [_peripheralTable reloadData];
@@ -100,17 +107,38 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [_myCentralManager connectPeripheral:[_peripherals objectAtIndex:indexPath.row] options:nil];
+    
+    [self performSegueWithIdentifier:@"peripheralDetailsSegue" sender:self];
 }
 
 - (void)centralManager:(CBCentralManager *)central
   didConnectPeripheral:(CBPeripheral *)peripheral {
     NSLog(@"Connection to peripheral was successful!");
     
+    _connected = YES;
+    
     [_myCentralManager stopScan];
     NSLog(@"Scan stopped");
     
     [peripheral setDelegate:self];
     
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"peripheralDetailsSegue"]){
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        PeripheralManagementViewController *controller = (PeripheralManagementViewController *)navController.topViewController;
+        controller.connectionStatus = _connected;
+        controller.connectedPeripheral = _myRemotePeripheral;
+        if (_connected == YES){
+            [controller.connectionStatusText setText:@"Connected"];
+            [controller.connectionStatusText setTextColor:[UIColor greenColor]];
+        }
+        else{
+            [controller.connectionStatusText setText:@"Disconnected"];
+            [controller.connectionStatusText setTextColor:[UIColor redColor]];
+        }
+    }
 }
 
 /*

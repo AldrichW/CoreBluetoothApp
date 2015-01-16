@@ -18,6 +18,8 @@
 		1029E21F1A64F8DE00507C4D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1029E21E1A64F8DE00507C4D /* CoreBluetooth.framework */; };
 		10FBD5F01A65E95F00D25B4C /* DiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FBD5EE1A65E95F00D25B4C /* DiscoverController.m */; };
 		10FBD5F11A65E95F00D25B4C /* DiscoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10FBD5EF1A65E95F00D25B4C /* DiscoverController.xib */; };
+		9F91913E1A68672A000FA97A /* PeripheralManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F91913C1A68672A000FA97A /* PeripheralManagementViewController.m */; };
+		9F91913F1A68672A000FA97A /* PeripheralManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F91913D1A68672A000FA97A /* PeripheralManagementViewController.xib */; };
 		9FBE250D1A670FC000E41BB3 /* PeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE250B1A670FC000E41BB3 /* PeripheralViewController.m */; };
 		9FBE250E1A670FC000E41BB3 /* PeripheralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBE250C1A670FC000E41BB3 /* PeripheralViewController.xib */; };
 /* End PBXBuildFile section */
@@ -51,6 +53,9 @@
 		10FBD5ED1A65E95F00D25B4C /* DiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverController.h; sourceTree = "<group>"; };
 		10FBD5EE1A65E95F00D25B4C /* DiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverController.m; sourceTree = "<group>"; };
 		10FBD5EF1A65E95F00D25B4C /* DiscoverController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverController.xib; sourceTree = "<group>"; };
+		9F91913B1A68672A000FA97A /* PeripheralManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeripheralManagementViewController.h; sourceTree = "<group>"; };
+		9F91913C1A68672A000FA97A /* PeripheralManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeripheralManagementViewController.m; sourceTree = "<group>"; };
+		9F91913D1A68672A000FA97A /* PeripheralManagementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeripheralManagementViewController.xib; sourceTree = "<group>"; };
 		9FBE250A1A670FC000E41BB3 /* PeripheralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeripheralViewController.h; sourceTree = "<group>"; };
 		9FBE250B1A670FC000E41BB3 /* PeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeripheralViewController.m; sourceTree = "<group>"; };
 		9FBE250C1A670FC000E41BB3 /* PeripheralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeripheralViewController.xib; sourceTree = "<group>"; };
@@ -112,6 +117,9 @@
 				9FBE250A1A670FC000E41BB3 /* PeripheralViewController.h */,
 				9FBE250B1A670FC000E41BB3 /* PeripheralViewController.m */,
 				9FBE250C1A670FC000E41BB3 /* PeripheralViewController.xib */,
+				9F91913B1A68672A000FA97A /* PeripheralManagementViewController.h */,
+				9F91913C1A68672A000FA97A /* PeripheralManagementViewController.m */,
+				9F91913D1A68672A000FA97A /* PeripheralManagementViewController.xib */,
 			);
 			path = CoreBluetoothApp;
 			sourceTree = "<group>";
@@ -231,6 +239,7 @@
 				1029E2041A64F87000507C4D /* Main.storyboard in Resources */,
 				1029E2091A64F87000507C4D /* LaunchScreen.xib in Resources */,
 				10FBD5F11A65E95F00D25B4C /* DiscoverController.xib in Resources */,
+				9F91913F1A68672A000FA97A /* PeripheralManagementViewController.xib in Resources */,
 				1029E2061A64F87000507C4D /* Images.xcassets in Resources */,
 				9FBE250E1A670FC000E41BB3 /* PeripheralViewController.xib in Resources */,
 			);
@@ -250,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F91913E1A68672A000FA97A /* PeripheralManagementViewController.m in Sources */,
 				1029E1FB1A64F87000507C4D /* AppDelegate.m in Sources */,
 				1029E1F81A64F87000507C4D /* main.m in Sources */,
 				9FBE250D1A670FC000E41BB3 /* PeripheralViewController.m in Sources */,
