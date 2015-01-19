@@ -109,6 +109,7 @@
     [_myCentralManager connectPeripheral:[_peripherals objectAtIndex:indexPath.row] options:nil];
     
     [self performSegueWithIdentifier:@"peripheralDetailsSegue" sender:self];
+    
 }
 
 - (void)centralManager:(CBCentralManager *)central

@@ -11,8 +11,7 @@
 @interface PeripheralViewController : UIViewController <CBPeripheralManagerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) CBPeripheralManager* myPeripheralManager;
-@property (nonatomic, strong) CBMutableCharacteristic* transferCharacteristic;
-@property (strong, nonatomic) NSData* dataToSend;
+
 @property (strong, atomic) NSDictionary* advertisementData;
 @property (nonatomic, readwrite) NSInteger sendDataIndex;
 

@@ -31,8 +31,28 @@
     else{
         [_advertisementData setValue:manufacturerData forKey:manufacturerDataKey];
     }
+    //Set ADvertising Packets
     [_manufacturerDataValue setText:@"88888888"];
+    
+    //Set Services
+    CBUUID *serviceUUID = [CBUUID UUIDWithString:@"69A28C31-6B9D-4EBF-BC22-40A7A47ED58E"];
+    CBMutableService *mockService = [[CBMutableService alloc] initWithType:serviceUUID primary:YES];
+    
+    //Set Characteristics
+    CBUUID *characteristicReadUUID = [CBUUID UUIDWithString:@"0036D779-E5EB-455B-9FF2-3B5775BF6637"];
+    NSData *readableData = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"../Data/sample_data.txt"]];
+    CBMutableCharacteristic *mockReadCharacteristic = [[CBMutableCharacteristic alloc] initWithType:characteristicReadUUID properties:CBCharacteristicPropertyRead value:readableData permissions:CBAttributePermissionsReadable];
+    
+    CBUUID *characteristicWriteUUID = [CBUUID UUIDWithString:@"A6ABAB2B-BE3D-4414-9A5C-C3F0200D39DE"];
+    CBMutableCharacteristic *mockWriteCharacteristic = [[CBMutableCharacteristic alloc] initWithType:characteristicWriteUUID properties:CBCharacteristicPropertyWrite value:nil permissions:CBAttributePermissionsWriteable];
+    
+    [mockService setCharacteristics:@[mockReadCharacteristic, mockWriteCharacteristic]];
+    
+    [_myPeripheralManager addService:mockService];
+    
     [_myPeripheralManager startAdvertising:_advertisementData];
+    
+    
     
 }
 
@@ -67,6 +87,15 @@
         NSLog(@"Peripheral is successfully advertising.");
     }
     
+}
+
+-(void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error{
+    if (error != nil){
+        NSLog(@"Error, could not add service. %@", [error localizedDescription]);
+    }
+    else{
+        NSLog(@"Success! Service was added");
+    }
 }
 
 /*

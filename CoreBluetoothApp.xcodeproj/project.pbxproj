@@ -16,6 +16,8 @@
 		1029E2091A64F87000507C4D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1029E2071A64F87000507C4D /* LaunchScreen.xib */; };
 		1029E2151A64F87000507C4D /* CoreBluetoothAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1029E2141A64F87000507C4D /* CoreBluetoothAppTests.m */; };
 		1029E21F1A64F8DE00507C4D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1029E21E1A64F8DE00507C4D /* CoreBluetooth.framework */; };
+		108386CF1A6CC6CD0022812D /* PeripheralData.m in Sources */ = {isa = PBXBuildFile; fileRef = 108386CE1A6CC6CD0022812D /* PeripheralData.m */; };
+		108386D31A6CE91D0022812D /* sample_data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 108386D21A6CE91D0022812D /* sample_data.txt */; };
 		10FBD5F01A65E95F00D25B4C /* DiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FBD5EE1A65E95F00D25B4C /* DiscoverController.m */; };
 		10FBD5F11A65E95F00D25B4C /* DiscoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10FBD5EF1A65E95F00D25B4C /* DiscoverController.xib */; };
 		9F91913E1A68672A000FA97A /* PeripheralManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F91913C1A68672A000FA97A /* PeripheralManagementViewController.m */; };
@@ -50,6 +52,9 @@
 		1029E2131A64F87000507C4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1029E2141A64F87000507C4D /* CoreBluetoothAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreBluetoothAppTests.m; sourceTree = "<group>"; };
 		1029E21E1A64F8DE00507C4D /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		108386CD1A6CC6CD0022812D /* PeripheralData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeripheralData.h; sourceTree = "<group>"; };
+		108386CE1A6CC6CD0022812D /* PeripheralData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeripheralData.m; sourceTree = "<group>"; };
+		108386D21A6CE91D0022812D /* sample_data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample_data.txt; sourceTree = "<group>"; };
 		10FBD5ED1A65E95F00D25B4C /* DiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverController.h; sourceTree = "<group>"; };
 		10FBD5EE1A65E95F00D25B4C /* DiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverController.m; sourceTree = "<group>"; };
 		10FBD5EF1A65E95F00D25B4C /* DiscoverController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverController.xib; sourceTree = "<group>"; };
@@ -102,6 +107,9 @@
 		1029E1F41A64F87000507C4D /* CoreBluetoothApp */ = {
 			isa = PBXGroup;
 			children = (
+				108386D11A6CE8F30022812D /* Data */,
+				108386C61A6CB6080022812D /* Central */,
+				108386C51A6CB5E50022812D /* Peripheral */,
 				1029E1F91A64F87000507C4D /* AppDelegate.h */,
 				1029E1FA1A64F87000507C4D /* AppDelegate.m */,
 				1029E1FF1A64F87000507C4D /* ViewController.h */,
@@ -111,15 +119,6 @@
 				1029E2071A64F87000507C4D /* LaunchScreen.xib */,
 				1029E1FC1A64F87000507C4D /* CoreBluetoothApp.xcdatamodeld */,
 				1029E1F51A64F87000507C4D /* Supporting Files */,
-				10FBD5ED1A65E95F00D25B4C /* DiscoverController.h */,
-				10FBD5EE1A65E95F00D25B4C /* DiscoverController.m */,
-				10FBD5EF1A65E95F00D25B4C /* DiscoverController.xib */,
-				9FBE250A1A670FC000E41BB3 /* PeripheralViewController.h */,
-				9FBE250B1A670FC000E41BB3 /* PeripheralViewController.m */,
-				9FBE250C1A670FC000E41BB3 /* PeripheralViewController.xib */,
-				9F91913B1A68672A000FA97A /* PeripheralManagementViewController.h */,
-				9F91913C1A68672A000FA97A /* PeripheralManagementViewController.m */,
-				9F91913D1A68672A000FA97A /* PeripheralManagementViewController.xib */,
 			);
 			path = CoreBluetoothApp;
 			sourceTree = "<group>";
@@ -148,6 +147,39 @@
 				1029E2131A64F87000507C4D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		108386C51A6CB5E50022812D /* Peripheral */ = {
+			isa = PBXGroup;
+			children = (
+				9FBE250A1A670FC000E41BB3 /* PeripheralViewController.h */,
+				9FBE250B1A670FC000E41BB3 /* PeripheralViewController.m */,
+				9FBE250C1A670FC000E41BB3 /* PeripheralViewController.xib */,
+				108386CD1A6CC6CD0022812D /* PeripheralData.h */,
+				108386CE1A6CC6CD0022812D /* PeripheralData.m */,
+			);
+			name = Peripheral;
+			sourceTree = "<group>";
+		};
+		108386C61A6CB6080022812D /* Central */ = {
+			isa = PBXGroup;
+			children = (
+				10FBD5ED1A65E95F00D25B4C /* DiscoverController.h */,
+				10FBD5EE1A65E95F00D25B4C /* DiscoverController.m */,
+				10FBD5EF1A65E95F00D25B4C /* DiscoverController.xib */,
+				9F91913B1A68672A000FA97A /* PeripheralManagementViewController.h */,
+				9F91913C1A68672A000FA97A /* PeripheralManagementViewController.m */,
+				9F91913D1A68672A000FA97A /* PeripheralManagementViewController.xib */,
+			);
+			name = Central;
+			sourceTree = "<group>";
+		};
+		108386D11A6CE8F30022812D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				108386D21A6CE91D0022812D /* sample_data.txt */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +274,7 @@
 				9F91913F1A68672A000FA97A /* PeripheralManagementViewController.xib in Resources */,
 				1029E2061A64F87000507C4D /* Images.xcassets in Resources */,
 				9FBE250E1A670FC000E41BB3 /* PeripheralViewController.xib in Resources */,
+				108386D31A6CE91D0022812D /* sample_data.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F91913E1A68672A000FA97A /* PeripheralManagementViewController.m in Sources */,
+				108386CF1A6CC6CD0022812D /* PeripheralData.m in Sources */,
 				1029E1FB1A64F87000507C4D /* AppDelegate.m in Sources */,
 				1029E1F81A64F87000507C4D /* main.m in Sources */,
 				9FBE250D1A670FC000E41BB3 /* PeripheralViewController.m in Sources */,
